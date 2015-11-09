@@ -125,7 +125,7 @@ public class MultiplexerTimeServer  implements  Runnable{
                             new java.util.Date(System.currentTimeMillis()).toString(): "BAD ORDER";
                     doWrite(sc,currentTime);
 
-                } else if (readBytes < 0 ){
+                  } else if (readBytes < 0 ){
                     //¶Ô¶ËÁ´Â·¹Ø±Õ
                     key.cancel();
                     sc.close();
