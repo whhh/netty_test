@@ -1,0 +1,47 @@
+
+
+"BlockedThread-3" - Thread t@12
+        //限期等待(TIMED_WAITING) ,顾名思义就是说当前线程停止是有限期的,到达一定的时间内会返回运行状态
+         设置sleep可以让当前线程进入这种状态。
+        java.lang.Thread.State: TIMED_WAITING
+        at java.lang.Thread.sleep(Native Method)
+        at java.lang.Thread.sleep(Thread.java:298)
+        at java.util.concurrent.TimeUnit.sleep(TimeUnit.java:328)
+        at threadtest.SleepUtils.second(SleepUtils.java:11)
+        at threadtest.ThreadState$Blocked.run(ThreadState.java:56)
+        - locked <12d3205> (a java.lang.Class)
+        at java.lang.Thread.run(Thread.<12d3205>java:619)
+
+        Locked ownable synchronizers:
+        - None
+
+
+
+        "WaitingThread" - Thread t@10
+        //无限期等待(WAITING)线程处于挂起状态(wait)，等待系统唤醒。
+           java.lang.Thread.State: WAITING
+        	at java.lang.Object.wait(Native Method)
+        	- waiting on <2f1921> (a java.lang.Class)
+        	at java.lang.Object.wait(Object.java:485)
+        	at threadtest.ThreadState$Waiting.run(ThreadState.java:40)
+        	at java.lang.Thread.run(Thread.java:619)
+
+           Locked ownable synchronizers:
+        	- None
+
+
+
+
+        "BlockedThread-2" - Thread t@13
+        //阻塞(BLOCKED)线程，锁竞争的时候会出现阻塞现象，也就是说锁被其他线程占用，
+         当前线程处于等待状态(等待获取排它锁)。
+           java.lang.Thread.State: BLOCKED
+            at threadtest.ThreadState$Blocked.run(ThreadState.java:56)
+            - waiting to lock <12d3205> (a java.lang.Class) owned by "BlockedThread-3" t@12
+            at java.lang.Thread.run(Thread.java:619)
+
+           Locked ownable synchronizers:
+            - None
+
+
+

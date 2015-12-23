@@ -29,7 +29,7 @@ public class SubReqClient {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline().addLast(
-                                    new ObjectDecoder(1024, ClassResolvers
+                                    new ObjectDecoder(8192, ClassResolvers
                                          .cacheDisabled(this.getClass()
                                                  .getClassLoader())));
                                             ch.pipeline().addLast(new ObjectEncoder());
@@ -49,7 +49,7 @@ public class SubReqClient {
     }
 
     public static void main(String[] args) throws  Exception{
-        int port = 8080;
+        int port = 30094;
         if(args != null && args.length > 0){
             try {
                 port = Integer.valueOf(args[0]);
@@ -57,6 +57,7 @@ public class SubReqClient {
                 //采用默认值
             }
         }
-        new SubReqClient().connect(port,"127.0.0.1");
+        new SubReqClient().connect(port,"11.8.126.12");
+
     }
 }
