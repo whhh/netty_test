@@ -10,6 +10,7 @@ import java.util.LinkedList;
 public class ConnectionPool {
     private LinkedList<Connection> pool = new LinkedList<Connection>();
 
+    //初始化连接
     public ConnectionPool(int initialSize){
         if(initialSize >0){
             for (int i = 0; i <initialSize ; i++) {
@@ -17,6 +18,7 @@ public class ConnectionPool {
             }
         }
     }
+    //添加连接 并并通知其他线程
     public void releaseConnection(Connection connection){
         if(connection != null){
             synchronized (pool){
@@ -31,6 +33,7 @@ public class ConnectionPool {
         synchronized (pool){
             //完全超时
             if(mills <= 0){
+                //如果没有元素
                 while(pool.isEmpty()){
                     pool.wait();
                 }

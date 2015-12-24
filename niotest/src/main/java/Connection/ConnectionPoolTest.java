@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @SuppressWarnings("all")
 public class ConnectionPoolTest {
-    static ConnectionPool pool = new ConnectionPool(10);
+    static ConnectionPool pool = new ConnectionPool(20);
     //保证所有ConnectionRunner能够同时开始
     static CountDownLatch start = new CountDownLatch(1);
     //main线程将会等待所有ConnectionRunner结束后才能继续执行
@@ -18,7 +18,7 @@ public class ConnectionPoolTest {
 
     public static void main(String[] args) throws  Exception{
         //线程数量，可以修改线程数量进行观察
-        int threadCount = 10;
+        int threadCount = 40;
         end = new CountDownLatch(threadCount);
         int count = 20;
         AtomicInteger got = new AtomicInteger();
@@ -59,6 +59,7 @@ public class ConnectionPoolTest {
                             connection.createStatement();
                             connection.commit();
                         }finally {
+                            //使用完之后返回到线程池
                             pool.releaseConnection(connection);
                             got.incrementAndGet();
                         }
